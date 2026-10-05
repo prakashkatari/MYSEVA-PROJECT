@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MySeva - Digital Government Services</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+    color: #222;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(90deg, #0b4f9c, #087f8c);
+    color: white;
+    padding: 15px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ffd43b;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+nav a:hover {
+    color: #ffd43b;
+}
+
+/* HERO */
+.hero {
+    min-height: 420px;
+    background:
+        linear-gradient(rgba(5,55,110,.8), rgba(0,120,130,.8)),
+        linear-gradient(135deg, #0b4f9c, #00a6a6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero h1 span {
+    color: #ffd43b;
+}
+
+.hero p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.btn {
+    padding: 13px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #ffd43b;
+    color: #17365d;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: white;
+}
+
+/* SEARCH */
+.search-box {
+    width: 80%;
+    max-width: 700px;
+    margin: -30px auto 40px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.15);
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+/* SECTION */
+section {
+    padding: 50px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    color: #0b4f9c;
+    font-size: 32px;
+}
+
+.section-title p {
+    margin-top: 8px;
+    color: #666;
+}
+
+/* SERVICES */
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.service-card {
+    background: white;
+    padding: 28px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+
+.icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.service-card h3 {
+    color: #0b4f9c;
+    margin-bottom: 10px;
+}
+
+.service-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.service-card button {
+    background: #0b4f9c;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* STATUS */
+.status-section {
+    background: #eaf6ff;
+}
+
+.status-box {
+    max-width: 600px;
+    background: white;
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.1);
+}
+
+.status-box input {
+    width: 100%;
+    padding: 13px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+.status-box button {
+    width: 100%;
+    padding: 13px;
+    background: #087f8c;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+#statusResult {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+}
+
+/* APPLICATION */
+.application {
+    background: white;
+}
+
+.form-container {
+    max-width: 700px;
+    margin: auto;
+    padding: 30px;
+    background: #f7f9fc;
+    border-radius: 15px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: #0b4f9c;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.stat {
+    background: white;
+    text-align: center;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+}
+
+.stat h2 {
+    color: #087f8c;
+    font-size: 35px;
+}
+
+/* FOOTER */
+footer {
+    background: #082f55;
+    color: white;
+    padding: 40px 7%;
+    text-align: center;
+}
+
+footer h2 {
+    margin-bottom: 10px;
+    color: #ffd43b;
+}
+
+footer p {
+    margin: 8px;
+    color: #ddd;
+}
+
+/* MOBILE */
+@media(max-width:768px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 8px;
+        font-size: 14px;
+    }
+
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        My<span>Seva</span>
+    </div>
+
+    <nav>
+        <a onclick="goHome()">Home</a>
+        <a onclick="scrollToServices()">Services</a>
+        <a onclick="scrollToStatus()">Status</a>
+        <a onclick="scrollToApplication()">Apply</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<div class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>Welcome to <span>MySeva</span></h1>
+
+        <p>
+            Your one-stop digital platform for accessing
+            government services quickly, easily and securely.
+        </p>
+
+        <button class="btn" onclick="scrollToServices()">
+            Explore Services
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔎 Search government services..."
+        onkeyup="searchServices()"
+    >
+
+</div>
+
+
+<!-- SERVICES -->
+
+<section id="services">
+
+    <div class="section-title">
+
+        <h2>Government Services</h2>
+
+        <p>
+            Access important citizen services from one place
+        </p>
+
+    </div>
+
+
+    <div class="services" id="serviceContainer">
+
+        <div class="service-card">
+
+            <div class="icon">🪪</div>
+
+            <h3>Aadhaar Services</h3>
+
+            <p>
+                Aadhaar related information and services.
+            </p>
+
+            <button onclick="applyService('Aadhaar Services')">
+                Apply Now
+            </button>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">📄</div>
+
+            <h3>Income Certificate</h3>
+
+            <p>
+                Apply for an income certificate online.
+            </p>
+
+            <button onclick="applyService('Income Certificate')">
+                Apply Now
+            </button>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">🏠</div>
+
+            <h3>Residence Certificate</h3>
+
+            <p>
+                Apply for your residence certificate.
+            </p>
+
+            <button onclick="applyService('Residence Certificate')">
+                Apply Now
+            </button>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">🎓</div>
+
+            <h3>Scholarship</h3>
+
+            <p>
+                Find and apply for eligible scholarships.
+            </p>
+
+            <button onclick="applyService('Scholarship')">
+                Apply Now
+            </button>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">💳</div>
+
+            <h3>Utility Bills</h3>
+
+            <p>
+                Pay electricity and other utility bills.
+            </p>
+
+            <button onclick="applyService('Utility Bills')">
+                Pay Now
+            </button>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">🚗</div>
+
+            <h3>Transport Services</h3>
+
+            <p>
+                Access vehicle and driving license services.
+            </p>
+
+            <button onclick="applyService('Transport Services')">
+                Apply Now
+            </button>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">🏥</div>
+
+            <h3>Health Services</h3>
+
+            <p>
+                Access government health services.
+            </p>
+
+            <button onclick="applyService('Health Services')">
+                Apply Now
+            </button>
+
+        </div>
+
+
+        <div class="service-card">
+
+            <div class="icon">👨‍🌾</div>
+
+            <h3>Farmer Services</h3>
+
+            <p>
+                Government schemes and farmer services.
+            </p>
+
+            <button onclick="applyService('Farmer Services')">
+                Apply Now
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATUS -->
+
+<section class="status-section" id="status">
+
+    <div class="section-title">
+
+        <h2>Application Status</h2>
+
+        <p>
+            Track your application using your application number.
+        </p>
+
+    </div>
+
+
+    <div class="status-box">
+
+        <input
+            type="text"
+            id="applicationNumber"
+            placeholder="Enter Application Number"
+        >
+
+        <button onclick="checkStatus()">
+            Check Status
+        </button>
+
+        <div id="statusResult"></div>
+
+    </div>
+
+</section>
+
+
+<!-- APPLICATION -->
+
+<section class="application" id="application">
+
+    <div class="section-title">
+
+        <h2>Online Application</h2>
+
+        <p>
+            Submit your details to apply for a government service.
+        </p>
+
+    </div>
+
+
+    <div class="form-container">
+
+        <form id="applicationForm">
+
+            <div class="form-group">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Phone Number</label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter phone number"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Select Service</label>
+
+                <select id="service" required>
+
+                    <option value="">
+                        -- Select Service --
+                    </option>
+
+                    <option>Aadhaar Services</option>
+                    <option>Income Certificate</option>
+                    <option>Residence Certificate</option>
+                    <option>Scholarship</option>
+                    <option>Utility Bills</option>
+                    <option>Transport Services</option>
+                    <option>Health Services</option>
+                    <option>Farmer Services</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Address</label>
+
+                <textarea
+                    id="address"
+                    placeholder="Enter your address"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Application
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- STATISTICS -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>MySeva Statistics</h2>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <h2>50+</h2>
+
+            <p>Government Services</p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>10K+</h2>
+
+            <p>Applications</p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>5K+</h2>
+
+            <p>Citizens Served</p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <h2>24/7</h2>
+
+            <p>Online Access</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>MySeva</h2>
+
+    <h3>mee seeve na seeva</h3>
+
+    <p>
+        Digital Government Service Portal
+    </p>
+
+    <p>
+        © 2026 MySeva. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* SCROLL FUNCTIONS */
+
+function goHome() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+function scrollToServices() {
+
+    document.getElementById("services")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+function scrollToStatus() {
+
+    document.getElementById("status")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+function scrollToApplication() {
+
+    document.getElementById("application")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* APPLY SERVICE */
+
+function applyService(serviceName) {
+
+    document.getElementById("service").value =
+        serviceName;
+
+    scrollToApplication();
+
+}
+
+
+/* SEARCH SERVICES */
+
+function searchServices() {
+
+    let input =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let cards =
+        document.querySelectorAll(".service-card");
+
+    cards.forEach(function(card) {
+
+        let text =
+            card.innerText.toLowerCase();
+
+        if(text.includes(input)) {
+
+            card.style.display = "block";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* APPLICATION STATUS */
+
+function checkStatus() {
+
+    let applicationNumber =
+        document.getElementById("applicationNumber").value;
+
+    let result =
+        document.getElementById("statusResult");
+
+
+    if(applicationNumber === "") {
+
+        result.style.display = "block";
+
+        result.innerHTML =
+            "⚠️ Please enter your application number.";
+
+        result.style.background = "#fff3cd";
+
+        return;
+
+    }
+
+
+    result.style.display = "block";
+
+    result.style.background = "#d1e7dd";
+
+    result.innerHTML =
+        "✅ Application " +
+        applicationNumber +
+        " is currently <b>Under Processing</b>.";
+
+}
+
+
+/* FORM SUBMISSION */
+
+document
+.getElementById("applicationForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    let applicationID =
+        "MS" +
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
+
+    alert(
+        "✅ Application Submitted Successfully!\n\n" +
+        "Application ID: " +
+        applicationID
+    );
+
+
+    this.reset();
+
+});
+
+</script>
+
+</body>
+</html>
